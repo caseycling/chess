@@ -1,0 +1,24 @@
+.board-cont {
+  text-align: center;
+  display: grid;
+  background: rgb(119, 149, 86);
+
+  height: 501px;
+  width: 501px;
+
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.board-sqr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border: solid 1px black;
+}
+
+.board-sqr:nth-child(even) {
+  background-color: lightyellow;
+}
