@@ -1,7 +1,7 @@
 .board-cont {
   text-align: center;
   display: grid;
-  background: rgb(119, 149, 86);
+  background: rgb(181, 136, 99);
 
   height: 501px;
   width: 501px;
@@ -11,6 +11,7 @@
 }
 
 .board-sqr {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,6 +20,13 @@
   border: solid 1px black;
 }
 
-.board-sqr:nth-child(even) {
-  background-color: lightyellow;
+.board-sqr:nth-child(n + 1):nth-child(odd):nth-child(-n + 8),
+.board-sqr:nth-child(n + 9):nth-child(even):nth-child(-n + 16),
+.board-sqr:nth-child(n + 17):nth-child(odd):nth-child(-n + 24),
+.board-sqr:nth-child(n + 25):nth-child(even):nth-child(-n + 32),
+.board-sqr:nth-child(n + 33):nth-child(odd):nth-child(-n + 40),
+.board-sqr:nth-child(n + 41):nth-child(even):nth-child(-n + 48),
+.board-sqr:nth-child(n + 49):nth-child(odd):nth-child(-n + 56),
+.board-sqr:nth-child(n + 57):nth-child(even):nth-child(-n + 64) {
+  background: #f0d9b5;
 }
