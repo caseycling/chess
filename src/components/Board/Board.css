@@ -30,3 +30,8 @@
 .board-sqr:nth-child(n + 57):nth-child(even):nth-child(-n + 64) {
   background: #f0d9b5;
 }
+
+
+.move-message {
+  color: white;
+}
