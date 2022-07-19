@@ -3,7 +3,7 @@ import './Board.css';
 
 import { useState } from 'react';
 
-let board = [
+let boardInit = [
   ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'],
   ['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn'],
   [null, null, null, null, null, null, null, null],
@@ -43,9 +43,18 @@ const Board = () => {
   return (
     <div>
       <div className='board-cont'>
-        {board.map((row) => {
-          return row.map((col) => {
-            return <div className='board-sqr'>{col}</div>;
+        {boardInit.map((row, x) => {
+          return row.map((col, y) => {
+            const id = `[${x},${y}]`;
+            return (
+              <div
+                id={id}
+                className='board-sqr'
+                onClick={() => console.log(id)}
+              >
+                {col}
+              </div>
+            );
           });
         })}
       </div>
