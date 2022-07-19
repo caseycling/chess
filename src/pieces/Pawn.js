@@ -7,10 +7,19 @@ export default class Pawn extends Piece {
   }
 
   movementSquares() {
-    let moves = [
-      { row: this.row + 1, col: this.col },
-      !this.hasMoved && { row: this.row + 2, col: this.col },
-    ];
+    //Black pieces will only be able to move down rows while white can only move up
+    let moves =
+      //Black logic
+      this.color === 'black'
+        ? [
+            { row: this.row + 1, col: this.col },
+            !this.hasMoved && { row: this.row + 2, col: this.col },
+          ]
+        : //White logic
+          [
+            { row: this.row - 1, col: this.col },
+            !this.hasMoved && { row: this.row + 2, col: this.col },
+          ];
 
     moves.filter();
 
@@ -18,11 +27,18 @@ export default class Pawn extends Piece {
   }
 
   attackSquares() {
-    let moves = [
-      { row: this.row + 1, col: this.col + 1 },
-      { row: this.row + 1, col: this.col - 1 },
-    ];
-
+    let moves =
+      //Black logic
+      this.color === 'black'
+        ? [
+            { row: this.row + 1, col: this.col + 1 },
+            { row: this.row + 1, col: this.col - 1 },
+          ]
+        : //White logic
+          [
+            { row: this.row - 1, col: this.col + 1 },
+            { row: this.row - 1, col: this.col - 1 },
+          ];
     moves.filter();
 
     return moves;
