@@ -1,64 +1,65 @@
 import React from 'react';
 import './Board.css';
 
+import BoardSquare from './BoardSquare'
+
+import ChessGame from '../../chess/ChessGame';
+
 import { useState } from 'react';
 
-let boardInit = [
-  ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'],
-  ['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn'],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  ['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn'],
-  ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'],
-];
+let game = new ChessGame();
 
-const MoveMessage = ({ clicks }) => {
-  if (clicks.length === 1) {
-    return <div className='move-message'>{clicks[0]}</div>;
-  } else if (clicks.length === 2) {
-    return (
-      <div className='move-message'>
-        {clicks[0]} to {clicks[1]}
-      </div>
-    );
-  }
-};
 
 const Board = () => {
-  let [clickState, setClickState] = useState([]);
-  let [boardState, setBoardState] = useState({});
+  let [lastClick, setLastClick] = useState(null);
+  let [moves, setMoves] = useState([]);
+  let [attacks, setAttacks] = useState([]);
 
-  function handleClick(rowCol) {
-    // handle pairs of clicks like moving e2 to e4 is stored as [e2, e4]
-    // once two clicks are registered clicking another time resets the array for the next pair of clicks
-    if (clickState.length < 2) {
-      setClickState([...clickState, rowCol]);
+  function handleClick(row, col) {
+    console.log('click', row, col);
+
+    if (lastClick === null) {
+      const piece = game.board.pieceAt(row, col);
+      if (!piece) return;
+
+      const moves = piece.movementSquares(game.board, row, col);
+      const attacks = piece.attackSquares(game.board, row, col);
+
+      setLastClick({row, col});
+      setMoves(moves);
+      setAttacks(attacks);
     } else {
-      setClickState([rowCol]);
+      console.log('make move')
+      game.makeMove(lastClick.row, lastClick.col, row, col);
+      setLastClick(null);
+      setMoves([]);
+      setAttacks([]);
     }
   }
 
   return (
     <div>
       <div className='board-cont'>
-        {boardInit.map((row, x) => {
-          return row.map((col, y) => {
-            const id = `[${x},${y}]`;
+        {game.board.grid.map((row, rowIndex) => {
+          return row.map((piece, colIndex) => {
             return (
-              <div
-                id={id}
-                className='board-sqr'
-                onClick={() => console.log(id)}
-              >
-                {col}
-              </div>
-            );
-          });
+              <BoardSquare
+                key={rowIndex + ',' + colIndex}
+
+                board={game.board}
+                row={rowIndex}
+                col={colIndex}
+
+                moves={moves}
+                attacks={attacks}
+
+                handleClick={handleClick}
+              />
+            )
+          })
+
         })}
       </div>
-      <MoveMessage clicks={clickState} />
     </div>
   );
 };
