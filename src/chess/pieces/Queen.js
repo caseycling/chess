@@ -6,7 +6,7 @@ export default class Queen extends Piece {
         return 'Queen';
     }
 
-    movementSquares() {
+    movementDirections() {
         return OMNIDIRECTIONAL;
     }
 }

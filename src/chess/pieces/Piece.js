@@ -16,14 +16,14 @@ export default class Piece {
         return [];
     }
 
-    movementSquares(row, col) {
-        return [];
+    movementSquares(board, row, col) {
+        return movesFromPosition(board, row, col)
     }
 
     // Usually a pieces attack squares are the same as its movement squares.
     // We can rewrite this to deal with pawns and with castling and with
     // king movement (because kings may attack squares they can't move to)
-    attackSquares(row, col) {
-        return this.movementSquares(row, col);
+    attackSquares(board, row, col) {
+        return this.movementSquares(board, row, col);
     }
 }

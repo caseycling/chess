@@ -1,14 +1,14 @@
 // Accepts the state of the board and the position of a piece on the board.
 // Returns available valid movements for that piece.
 export function movesFromPosition(board, row, col) {
-    const piece = board[row][col];
+    const piece = board.pieceAt(row, col);
     if (!piece) {
         console.log('no pieces at position row:', row, 'col:', col);
         return [];
     }
 
     const moves = [];
-    piece.movementDirections.forEach(direction => {
+    piece.movementDirections().forEach(direction => {
         gatherMovementSquaresInDirection(board, moves, direction, row, col)
     });
 
@@ -16,7 +16,7 @@ export function movesFromPosition(board, row, col) {
 }
 
 function gatherMovementSquaresInDirection(board, moves, direction, startRow, startCol) {
-    const startColor = board[startRow][startCol].color;
+    const startColor = board.pieceAt(startRow, startCol).color;
     let row = startRow;
     let col = startCol;
 
@@ -34,8 +34,8 @@ function gatherMovementSquaresInDirection(board, moves, direction, startRow, sta
         }
 
         // one can not attack one's own pieces (nor is it honorable)
-        let otherPiece = board[row][col];
-        if (otherPiece.color === startColor) {
+        let otherPiece = board.pieceAt(row, col);
+        if (false && otherPiece.color === startColor) {
             return;
         }
 
@@ -43,7 +43,7 @@ function gatherMovementSquaresInDirection(board, moves, direction, startRow, sta
 
         // if there is another piece at this space then the space has been added
         // as a valid move but no moves are available in this direction after this.
-        if (otherPiece.color !== startColor) {
+        if (otherPiece && otherPiece.color !== startColor) {
             return;
         }
     }

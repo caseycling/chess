@@ -1,5 +1,5 @@
 import Piece from './Piece';
-import { ORTHOGONAL } from '../util/Constants';
+import { DIAGONAL, ORTHOGONAL } from '../util/Constants';
 
 export default class Bishop extends Piece {
     toString() {
@@ -7,6 +7,6 @@ export default class Bishop extends Piece {
     }
 
     movementDirections() {
-        return ORTHOGONAL;
+        return DIAGONAL;
     }
 }

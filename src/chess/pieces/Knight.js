@@ -5,7 +5,7 @@ export default class Knight extends Piece {
         return 'Knight';
     }
 
-    movementSquares(row, col) {
+    movementSquares(board, row, col) {
         return [
             {row: row + 2, col: col - 1},
             {row: row + 2, col: col + 1},

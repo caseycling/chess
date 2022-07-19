@@ -31,9 +31,8 @@ const Board = () => {
     const piece = game.board.pieceAt(row, col);
     if (!piece) return;
 
-    const moves = piece.movementSquares(row, col);
-    const attacks = piece.attackSquares(row, col);
-    console.log({moves, attacks});
+    const moves = piece.movementSquares(game.board, row, col);
+    const attacks = piece.attackSquares(game.board, row, col);
 
     setMoves(moves);
     setAttacks(attacks);
