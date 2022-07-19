@@ -31,7 +31,22 @@
   background: #f0d9b5;
 }
 
-
 .move-message {
   color: white;
+}
+
+.black {
+  color: black;
+}
+
+.white {
+  color: white;
+}
+
+.available-move {
+  background-color: springgreen !important;
+}
+
+.available-attack {
+  background-color: salmon !important;
 }
