@@ -10,6 +10,11 @@ export default class ChessGame {
     }
 
     makeMove(startRow, startCol, endRow, endCol) {
+        if (startRow === endRow && startCol === endCol) {
+            console.log('trying to make move from a square to itself.');
+            return;
+        }
+
         let startPiece = this.board.pieceAt(startRow, startCol);
         if (!startPiece) {
             console.log('No piece at start position row:', startRow, 'col:', startCol);
@@ -22,5 +27,8 @@ export default class ChessGame {
 
         // grab a reference to the endPiece so we can display it as capture and keep track of points later.
         let endPiece = this.board.pieceAt(endRow, endCol);
+
+        this.board.grid[endRow][endCol] = startPiece;
+        this.board.grid[startRow][startCol] = null;
     }
 }

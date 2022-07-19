@@ -16,6 +16,10 @@ export default class Piece {
         return [];
     }
 
+    movementLimit() {
+        return 8;
+    }
+
     movementSquares(board, row, col) {
         return movesFromPosition(board, row, col)
     }

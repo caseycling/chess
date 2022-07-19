@@ -9,4 +9,8 @@ export default class King extends Piece {
     movementDirections() {
         return OMNIDIRECTIONAL;
     }
+
+    movementLimit() {
+        return 1;
+    }
 }

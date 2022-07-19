@@ -16,15 +16,12 @@ export function movesFromPosition(board, row, col) {
 }
 
 function gatherMovementSquaresInDirection(board, moves, direction, startRow, startCol) {
-    const startColor = board.pieceAt(startRow, startCol).color;
+    const startPiece = board.pieceAt(startRow, startCol);
+    const startColor = startPiece.color;
     let row = startRow;
     let col = startCol;
 
-    // kind of weird to use a for loop here but a while loop is just as weird.
-    // I prefer to use a for loop because at least we know we won't ever search
-    // more than 8 spaces (seven spaces really) so this program will never get caught
-    // in an infinite loop here. (thought if we have proper logic it shouldn't either)
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < startPiece.movementLimit(); i++) {
         row += direction.dy;
         col += direction.dx;
 
@@ -35,7 +32,7 @@ function gatherMovementSquaresInDirection(board, moves, direction, startRow, sta
 
         // one can not attack one's own pieces (nor is it honorable)
         let otherPiece = board.pieceAt(row, col);
-        if (false && otherPiece.color === startColor) {
+        if (otherPiece && otherPiece.color === startColor) {
             return;
         }
 

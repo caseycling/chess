@@ -10,32 +10,30 @@ import { useState } from 'react';
 let game = new ChessGame();
 
 const Board = () => {
-  let [rowColKey, setRowColKey] = useState(null);
+  let [lastClick, setLastClick] = useState(null);
   let [moves, setMoves] = useState([]);
   let [attacks, setAttacks] = useState([]);
 
   function handleClick(row, col) {
-    const key = row + ',' + col;
+    console.log('click', row, col);
 
-    if (rowColKey === null) {
-      setRowColKey(key);
-    } else if (key === rowColKey) {
-      setRowColKey(null);
+    if (lastClick === null) {
+      const piece = game.board.pieceAt(row, col);
+      if (!piece) return;
+
+      const moves = piece.movementSquares(game.board, row, col);
+      const attacks = piece.attackSquares(game.board, row, col);
+
+      setLastClick({row, col});
+      setMoves(moves);
+      setAttacks(attacks);
+    } else {
+      console.log('make move')
+      game.makeMove(lastClick.row, lastClick.col, row, col);
+      setLastClick(null);
       setMoves([]);
       setAttacks([]);
-      return;
-    } else if (key !== rowColKey) {
-      
     }
-
-    const piece = game.board.pieceAt(row, col);
-    if (!piece) return;
-
-    const moves = piece.movementSquares(game.board, row, col);
-    const attacks = piece.attackSquares(game.board, row, col);
-
-    setMoves(moves);
-    setAttacks(attacks);
   }
 
   return (
