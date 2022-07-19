@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 let game = new ChessGame();
 
+
 const Board = () => {
   let [lastClick, setLastClick] = useState(null);
   let [moves, setMoves] = useState([]);
@@ -56,6 +57,7 @@ const Board = () => {
               />
             )
           })
+
         })}
       </div>
     </div>
