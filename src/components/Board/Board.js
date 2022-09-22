@@ -1,14 +1,13 @@
 import React from 'react';
 import './Board.css';
 
-import BoardSquare from './BoardSquare'
+import BoardSquare from './BoardSquare';
 
 import ChessGame from '../../chess/ChessGame';
 
 import { useState } from 'react';
 
 let game = new ChessGame();
-
 
 const Board = () => {
   let [lastClick, setLastClick] = useState(null);
@@ -25,11 +24,12 @@ const Board = () => {
       const moves = piece.movementSquares(game.board, row, col);
       const attacks = piece.attackSquares(game.board, row, col);
 
-      setLastClick({row, col});
+      setLastClick({ row, col });
       setMoves(moves);
       setAttacks(attacks);
+      console.log(attacks);
     } else {
-      console.log('make move')
+      console.log('make move');
       game.makeMove(lastClick.row, lastClick.col, row, col);
       setLastClick(null);
       setMoves([]);
@@ -45,19 +45,15 @@ const Board = () => {
             return (
               <BoardSquare
                 key={rowIndex + ',' + colIndex}
-
                 board={game.board}
                 row={rowIndex}
                 col={colIndex}
-
                 moves={moves}
                 attacks={attacks}
-
                 handleClick={handleClick}
               />
-            )
-          })
-
+            );
+          });
         })}
       </div>
     </div>
