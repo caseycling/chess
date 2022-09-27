@@ -37,6 +37,9 @@ const Board = () => {
     }
   }
 
+  const files = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  const ranks = [8, 7, 6, 5, 4, 3, 2, 1];
+
   return (
     <div>
       <div className='board-cont'>
@@ -45,6 +48,7 @@ const Board = () => {
             return (
               <BoardSquare
                 key={rowIndex + ',' + colIndex}
+                id={`${files[colIndex]}${ranks[rowIndex]}`}
                 board={game.board}
                 row={rowIndex}
                 col={colIndex}
