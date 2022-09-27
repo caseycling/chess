@@ -22,12 +22,12 @@ describe('Testing piece behavior and functionality', function () {
   });
 
   it('Displays movement and attack squares for pawns', function () {
-    cy.getSqaure('D2').click();
+    cy.getSquare('D2').click();
 
-    cy.getSqaure('C3').should('have.class', 'available-attack');
-    cy.getSqaure('D3').should('have.class', 'available-move');
-    cy.getSqaure('E3').should('have.class', 'available-attack');
-    cy.getSqaure('D4').should('have.class', 'available-move');
+    cy.getSquare('C3').should('have.class', 'available-attack');
+    cy.getSquare('D3').should('have.class', 'available-move');
+    cy.getSquare('E3').should('have.class', 'available-attack');
+    cy.getSquare('D4').should('have.class', 'available-move');
   });
 
   it('Allows pieces to be captured and removed from the board', function () {
@@ -35,7 +35,7 @@ describe('Testing piece behavior and functionality', function () {
     cy.movePiece('E7', 'E5');
     cy.movePiece('D4', 'E5');
 
-    cy.getSqaure('E5').should('have.class', 'white');
+    cy.getSquare('E5').should('have.class', 'white');
     cy.getSquare('E5').should('not.have.class', 'black');
 
     cy.get('.white:contains(Pawn)').should('have.length', 8);

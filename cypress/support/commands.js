@@ -12,5 +12,5 @@ Cypress.Commands.add('movePiece', (startSqr, endSqr) => {
 });
 
 Cypress.Commands.add('getSquare', (sqr) => {
-  return cy.get(`div[id="${sqr}"]`).click();
+  return cy.get(`div[id="${sqr}"]`);
 });
