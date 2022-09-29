@@ -36,4 +36,12 @@ describe('Testing initial board state of chess app', function () {
     cy.verifyWhitePieces('Queen', 1);
     cy.verifyBlackPieces('Queen', 1);
   });
+
+  // it('changes link color on hover', function () {
+  //   cy.get('.ig-link').should('have.css', 'color', 'rgb(255, 255, 255)');
+
+  //   cy.get('.ig-link')
+  //     .trigger('mouseover')
+  //     .should('have.css', 'color', 'rgb(173, 6, 173)');
+  // });
 });

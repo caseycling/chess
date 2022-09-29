@@ -3,6 +3,10 @@
   text-decoration: none;
 }
 
+.ig-link:hover {
+  color: rgb(173, 6, 173);
+}
+
 .board-cont {
   text-align: center;
   display: grid;

@@ -52,5 +52,7 @@ export default class ChessGame {
     let nextPlayer = this.currentPlayer === WHITE ? BLACK : WHITE;
 
     this.currentPlayer = nextPlayer;
+
+    startPiece.hasMoved = true;
   }
 }
