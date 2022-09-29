@@ -21,15 +21,6 @@ describe('Testing piece behavior and functionality', function () {
     cy.getSquare('D5').should('not.have.class', 'white');
   });
 
-  it('Displays movement and attack squares for pawns', function () {
-    cy.getSquare('D2').click();
-
-    cy.getSquare('C3').should('have.class', 'available-attack');
-    cy.getSquare('D3').should('have.class', 'available-move');
-    cy.getSquare('E3').should('have.class', 'available-attack');
-    cy.getSquare('D4').should('have.class', 'available-move');
-  });
-
   it('Allows pieces to be captured and removed from the board', function () {
     cy.movePiece('D2', 'D4');
     cy.movePiece('E7', 'E5');
