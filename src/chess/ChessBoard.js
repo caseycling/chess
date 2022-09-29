@@ -20,6 +20,20 @@ export default class ChessBoard {
         return file + rank;
     }
 
+    positionToRowCol(position) {
+      // e4 has rank e and file 4
+      // e4 converts to row 3 col 4
+      // a8 converts to row 0 col 0 (top left)
+      // h1 converts to row 7 col 7 (bottom right)
+      const rank = position[1];
+      const file = position[0];
+
+      const row = 8 - parseInt(rank, 10);
+      const col = 'abcdefgh'.indexOf(file);
+
+      return { row, col };
+    }
+
     isValidSquare(row, col) {
         // People may tell you to "optimize" this and simply return the boolean expression itself.
         // But if you do that you lose some ability to step through this in a debugger and see what's
