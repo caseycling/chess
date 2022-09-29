@@ -1,25 +1,16 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('verifyWhitePieces', (piece, number) => {
+  return cy.get(`.white:contains(${piece})`).should('have.length', number);
+});
+
+Cypress.Commands.add('verifyBlackPieces', (piece, number) => {
+  return cy.get(`.black:contains(${piece})`).should('have.length', number);
+});
+
+Cypress.Commands.add('movePiece', (startSqr, endSqr) => {
+  cy.get(`div[id="${startSqr}"]`).click();
+  return cy.get(`div[id="${endSqr}"]`).click();
+});
+
+Cypress.Commands.add('getSquare', (sqr) => {
+  return cy.get(`div[id="${sqr}"]`);
+});

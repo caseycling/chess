@@ -1,3 +1,8 @@
+.ig-link {
+  color: white;
+  text-decoration: none;
+}
+
 .board-cont {
   text-align: center;
   display: grid;

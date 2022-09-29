@@ -42,6 +42,12 @@ const Board = () => {
 
   return (
     <div>
+      <a
+        href='https://www.instagram.com/seattlechessclub/?utm_medium=copy_link&hl=en'
+        className='ig-link'
+      >
+        Join us at the Seattle Chess Club
+      </a>
       <div className='board-cont'>
         {game.board.grid.map((row, rowIndex) => {
           return row.map((piece, colIndex) => {
