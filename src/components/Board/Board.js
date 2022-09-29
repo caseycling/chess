@@ -27,8 +27,15 @@ const Board = () => {
       setLastClick({ row, col });
       setMoves(moves);
       setAttacks(attacks);
-      console.log(attacks);
     } else {
+      // moves is an array objects with row and col properties of integers
+      // like: [{row: 0, col: 0}, {row: 0, col: 1}]
+      const isSameObject = el => el.row === row && el.col === col;
+      if (!moves.find(isSameObject) && !attacks.find(isSameObject)) {
+        console.log('invalid move', {row, col});
+        return
+      }
+
       console.log('make move');
       game.makeMove(lastClick.row, lastClick.col, row, col);
       setLastClick(null);
@@ -60,7 +67,7 @@ const Board = () => {
                 col={colIndex}
                 moves={moves}
                 attacks={attacks}
-                handleClick={handleClick}
+                handleClick={() => handleClick(rowIndex, colIndex)}
               />
             );
           });
