@@ -26,7 +26,7 @@ export default class Pawn extends Piece {
 
   movementSquares(board, row, col) {
     const moves = [{ row: row + this.orientation, col }];
-    if (!this.hasMoved) {
+    if (this.moves === 0) {
       moves.push({ row: row + 2 * this.orientation, col });
     }
 

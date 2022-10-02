@@ -53,6 +53,6 @@ export default class ChessGame {
 
     this.currentPlayer = nextPlayer;
 
-    startPiece.hasMoved = true;
+    startPiece.moves++;
   }
 }

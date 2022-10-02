@@ -6,7 +6,7 @@ const COLORS = [BLACK, WHITE];
 export default class Piece {
   constructor(color = 0) {
     this.color = COLORS[color];
-    this.hasMoved = false;
+    this.moves = 0;
   }
 
   toString() {
