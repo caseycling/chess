@@ -1,6 +1,6 @@
   import * as Constants from './Constants';
 
-  const PIECES = {
+  export const PIECES = {
     [Constants.WHITE]: {
         [Constants.KING]: '♔',
         [Constants.QUEEN]: '♕',

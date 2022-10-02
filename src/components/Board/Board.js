@@ -11,6 +11,7 @@ let game = new ChessGame();
 
 const Board = () => {
   let [lastClick, setLastClick] = useState(null);
+  let [selectedSquare, setSelectedSquare] = useState(null);
   let [moves, setMoves] = useState([]);
   let [attacks, setAttacks] = useState([]);
 
@@ -47,9 +48,7 @@ const Board = () => {
 
       console.log('make move');
       game.makeMove(lastClick.row, lastClick.col, row, col);
-      setLastClick(null);
-      setMoves([]);
-      setAttacks([]);
+      deselectPiece()
     }
 
     if (thisPiece && thisPiece.color === lastPiece.color) {
@@ -65,13 +64,16 @@ const Board = () => {
 
     const {openSquares, captures} = game.availableMovesForPieceAtPosition(row, col);
 
-    setLastClick({ row, col });
+    const lastClick = {row, col};
+    setLastClick(lastClick);
+    setSelectedSquare(lastClick);
     setMoves(openSquares);
     setAttacks(captures);
   }
 
   function deselectPiece() {
     setLastClick(null);
+    setSelectedSquare(null);
     setMoves([]);
     setAttacks([]);
   }
@@ -97,6 +99,7 @@ const Board = () => {
                 board={game.board}
                 row={rowIndex}
                 col={colIndex}
+                selectedSquare={selectedSquare}
                 moves={moves}
                 attacks={attacks}
                 handleClick={() => handleClick(rowIndex, colIndex)}
