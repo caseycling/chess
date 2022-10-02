@@ -17,9 +17,25 @@ const Board = () => {
   function handleClick(row, col) {
     console.log('click', row, col);
 
-    if (isSelectingPiece(row, col)) {
+    const thisPiece = game.board.pieceAt(row, col);
+    const lastPiece = lastClick && game.board.pieceAt(lastClick.row, lastClick.col);
+
+    if (thisPiece && thisPiece.color !== game.currentPlayer) {
+      console.log('Player is trying to move opponent\'s piece');
+      return false;
+    }
+
+    if (lastClick === null) {
       selectPiece(row, col);
-    } else {
+      return;
+    }
+
+    if (row === lastClick.row && col === lastClick.col) {
+      deselectPiece();
+      return;
+    }
+
+    if (!thisPiece && lastPiece) {
       // moves is an array objects with row and col properties of integers
       // like: [{row: 0, col: 0}, {row: 0, col: 1}]
       const isSameObject = el => el.row === row && el.col === col;
@@ -35,20 +51,10 @@ const Board = () => {
       setMoves([]);
       setAttacks([]);
     }
-  }
 
-  function isSelectingPiece(row, col) {
-    if (lastClick === null) {
-      return true;
-    }
-
-    const thisPiece = game.board.pieceAt(row, col);
-    if (!thisPiece) {
-      return false;
-    }
-
-    const lastPiece = game.board.pieceAt(lastClick.row, lastClick.col);
-    if (lastPiece.color === thisPiece.color) {
+    if (thisPiece && thisPiece.color === lastPiece.color) {
+      console.log('Player is choosing to move a different piece.');
+      selectPiece(row, col);
       return true;
     }
   }
