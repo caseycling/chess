@@ -1,4 +1,4 @@
-import { movesFromPosition } from '../util/Moves';
+import * as Moves from '../util/Moves';
 
 import { BLACK, WHITE } from '../util/Constants';
 const COLORS = [BLACK, WHITE];
@@ -22,7 +22,7 @@ export default class Piece {
   }
 
   movementSquares(board, row, col) {
-    return movesFromPosition(board, row, col);
+    return Moves.movesFromPosition(board, row, col);
   }
 
   // Usually a pieces attack squares are the same as its movement squares.

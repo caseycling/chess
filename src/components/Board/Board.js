@@ -17,22 +17,15 @@ const Board = () => {
   function handleClick(row, col) {
     console.log('click', row, col);
 
-    if (lastClick === null) {
-      const piece = game.board.pieceAt(row, col);
-      if (!piece) return;
-
-      const moves = piece.movementSquares(game.board, row, col);
-      const attacks = piece.attackSquares(game.board, row, col);
-
-      setLastClick({ row, col });
-      setMoves(moves);
-      setAttacks(attacks);
+    if (isSelectingPiece(row, col)) {
+      selectPiece(row, col);
     } else {
       // moves is an array objects with row and col properties of integers
       // like: [{row: 0, col: 0}, {row: 0, col: 1}]
       const isSameObject = el => el.row === row && el.col === col;
       if (!moves.find(isSameObject) && !attacks.find(isSameObject)) {
         console.log('invalid move', {row, col});
+        deselectPiece();
         return
       }
 
@@ -42,6 +35,39 @@ const Board = () => {
       setMoves([]);
       setAttacks([]);
     }
+  }
+
+  function isSelectingPiece(row, col) {
+    if (lastClick === null) {
+      return true;
+    }
+
+    const thisPiece = game.board.pieceAt(row, col);
+    if (!thisPiece) {
+      return false;
+    }
+
+    const lastPiece = game.board.pieceAt(lastClick.row, lastClick.col);
+    if (lastPiece.color === thisPiece.color) {
+      return true;
+    }
+  }
+
+  function selectPiece(row, col) {
+    const piece = game.board.pieceAt(row, col);
+    if (!piece) return;
+
+    const {openSquares, captures} = game.availableMovesForPieceAtPosition(row, col);
+
+    setLastClick({ row, col });
+    setMoves(openSquares);
+    setAttacks(captures);
+  }
+
+  function deselectPiece() {
+    setLastClick(null);
+    setMoves([]);
+    setAttacks([]);
   }
 
   const files = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
