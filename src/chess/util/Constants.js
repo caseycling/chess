@@ -1,6 +1,13 @@
 export const BLACK = 'black';
 export const WHITE = 'white';
 
+export const KING = 'King';
+export const QUEEN = 'Queen';
+export const ROOK = 'Rook';
+export const BISHOP = 'Bishop';
+export const KNIGHT = 'Knight';
+export const PAWN = 'Pawn';
+
 /*
   a b c d e f g h black
 8        North +y

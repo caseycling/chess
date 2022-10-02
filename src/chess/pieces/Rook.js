@@ -1,12 +1,12 @@
 import Piece from './Piece';
-import { ORTHOGONAL } from '../util/Constants';
+import * as Constants from '../util/Constants';
 
 export default class Rook extends Piece {
     toString() {
-        return 'Rook';
+        return Constants.ROOK;
     }
 
     movementDirections() {
-        return ORTHOGONAL;
+        return Constants.ORTHOGONAL;
     }
 }

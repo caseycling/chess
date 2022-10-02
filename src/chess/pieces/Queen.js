@@ -1,12 +1,12 @@
 import Piece from './Piece';
-import { OMNIDIRECTIONAL } from '../util/Constants';
+import * as Constants from '../util/Constants';
 
 export default class Queen extends Piece {
     toString() {
-        return 'Queen';
+        return Constants.QUEEN
     }
 
     movementDirections() {
-        return OMNIDIRECTIONAL;
+        return Constants.OMNIDIRECTIONAL;
     }
 }

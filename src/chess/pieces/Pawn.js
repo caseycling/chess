@@ -1,5 +1,5 @@
 import Piece from './Piece';
-import { BLACK, WHITE } from '../util/Constants';
+import * as Constants from '../util/Constants';
 
 export default class Pawn extends Piece {
   constructor(color) {
@@ -11,15 +11,15 @@ export default class Pawn extends Piece {
   }
 
   toString() {
-    return 'Pawn';
+    return Constants.PAWN;
   }
 
   _orientation() {
     // slap a "plus" one in front of positive one
     // just so it balances well with negative one.
-    if (this.color === BLACK) {
+    if (this.color === Constants.BLACK) {
       return +1;
-    } else if (this.color === WHITE) {
+    } else if (this.color === Constants.WHITE) {
       return -1;
     }
   }

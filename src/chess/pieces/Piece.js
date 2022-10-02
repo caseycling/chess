@@ -1,7 +1,7 @@
 import * as Moves from '../util/Moves';
 
-import { BLACK, WHITE } from '../util/Constants';
-const COLORS = [BLACK, WHITE];
+import * as Constants from '../util/Constants';
+const COLORS = [Constants.BLACK, Constants.WHITE];
 
 export default class Piece {
   constructor(color = 0) {

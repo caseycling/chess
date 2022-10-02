@@ -1,13 +1,13 @@
 import Piece from './Piece';
-import { OMNIDIRECTIONAL } from '../util/Constants';
+import * as Constants from '../util/Constants';
 
 export default class King extends Piece {
     toString() {
-        return 'King';
+        return Constants.KING;
     }
 
     movementDirections() {
-        return OMNIDIRECTIONAL;
+        return Constants.OMNIDIRECTIONAL;
     }
 
     movementLimit() {
