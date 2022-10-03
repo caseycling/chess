@@ -21,7 +21,7 @@ const Board = () => {
     const thisPiece = game.board.pieceAt(row, col);
     const lastPiece = lastClick && game.board.pieceAt(lastClick.row, lastClick.col);
 
-    if (thisPiece && thisPiece.color !== game.currentPlayer) {
+    if (!lastClick && thisPiece && thisPiece.color !== game.currentPlayer) {
       console.log('Player is trying to move opponent\'s piece');
       return false;
     }
@@ -36,6 +36,7 @@ const Board = () => {
       return;
     }
 
+    // move a piece to an empty square
     if (!thisPiece && lastPiece) {
       // moves is an array objects with row and col properties of integers
       // like: [{row: 0, col: 0}, {row: 0, col: 1}]
@@ -51,10 +52,18 @@ const Board = () => {
       deselectPiece()
     }
 
+    // the player clicked on one piece, then they clicked on another of their own pieces.
     if (thisPiece && thisPiece.color === lastPiece.color) {
       console.log('Player is choosing to move a different piece.');
       selectPiece(row, col);
       return true;
+    }
+
+    // the player has chosen their piece and they're capturing an opponent piece
+    if (thisPiece && lastPiece && thisPiece.color !== lastPiece.color) {
+      console.log('player is capturing a piece');
+      game.makeMove(lastClick.row, lastClick.col, row, col);
+      deselectPiece();
     }
   }
 
