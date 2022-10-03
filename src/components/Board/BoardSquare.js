@@ -1,4 +1,6 @@
-const BoardSquare = ({ id, board, row, col, moves, attacks, handleClick }) => {
+import * as UnicodePieces from '../../chess/util/UnicodePieces';
+
+const BoardSquare = ({ id, board, row, col, selectedSquare, moves, attacks, handleClick }) => {
   let display = '';
   let className = 'board-sqr';
 
@@ -19,11 +21,13 @@ const BoardSquare = ({ id, board, row, col, moves, attacks, handleClick }) => {
   });
 
   if (piece) {
-    display = piece.toString();
+    display = UnicodePieces.PIECES[piece.color][piece.toString()];
     className += ' ' + piece.color;
   }
 
-  if (isAvailableAttack) {
+  if (selectedSquare && row === selectedSquare.row && col === selectedSquare.col) {
+    className += ' selected-square';
+  } else if (isAvailableAttack) {
     className += ' available-attack';
   } else if (isAvailableMove) {
     className += ' available-move';

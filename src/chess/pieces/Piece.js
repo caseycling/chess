@@ -1,12 +1,12 @@
-import { movesFromPosition } from '../util/Moves';
+import * as Moves from '../util/Moves';
 
-import { BLACK, WHITE } from '../util/Constants';
-const COLORS = [BLACK, WHITE];
+import * as Constants from '../util/Constants';
+const COLORS = [Constants.BLACK, Constants.WHITE];
 
 export default class Piece {
   constructor(color = 0) {
     this.color = COLORS[color];
-    this.hasMoved = false;
+    this.moves = 0;
   }
 
   toString() {
@@ -22,7 +22,7 @@ export default class Piece {
   }
 
   movementSquares(board, row, col) {
-    return movesFromPosition(board, row, col);
+    return Moves.movesFromPosition(board, row, col);
   }
 
   // Usually a pieces attack squares are the same as its movement squares.

@@ -9,6 +9,17 @@ export default class ChessGame {
     this.currentPlayer = WHITE;
   }
 
+  availableMovesForPieceAtPosition(row, col) {
+    // return the moves categorizes differently between movements and attacks so
+    // squares can be styled differently.
+    const piece = this.board.pieceAt(row, col);
+    const moves = {
+      openSquares: piece.movementSquares(this.board, row, col),
+      captures: piece.attackSquares(this.board, row, col),
+    }
+    return moves;
+  }
+
   makeMove(startRow, startCol, endRow, endCol) {
     if (startRow === endRow && startCol === endCol) {
       console.log('trying to make move from a square to itself.');
@@ -53,6 +64,6 @@ export default class ChessGame {
 
     this.currentPlayer = nextPlayer;
 
-    startPiece.hasMoved = true;
+    startPiece.moves++;
   }
 }

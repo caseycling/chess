@@ -1,8 +1,9 @@
 import Piece from './Piece';
+import * as Constants from '../util/Constants';
 
 export default class Knight extends Piece {
     toString() {
-        return 'Knight';
+        return Constants.KNIGHT;
     }
 
     movementSquares(board, row, col) {

@@ -1,5 +1,5 @@
 import Piece from './Piece';
-import { BLACK, WHITE } from '../util/Constants';
+import * as Constants from '../util/Constants';
 
 export default class Pawn extends Piece {
   constructor(color) {
@@ -11,33 +11,51 @@ export default class Pawn extends Piece {
   }
 
   toString() {
-    return 'Pawn';
+    return Constants.PAWN;
   }
 
   _orientation() {
     // slap a "plus" one in front of positive one
     // just so it balances well with negative one.
-    if (this.color === BLACK) {
+    if (this.color === Constants.BLACK) {
       return +1;
-    } else if (this.color === WHITE) {
+    } else if (this.color === Constants.WHITE) {
       return -1;
     }
   }
 
   movementSquares(board, row, col) {
-    const moves = [{ row: row + this.orientation, col }];
-    if (!this.hasMoved) {
-      moves.push({ row: row + 2 * this.orientation, col });
-    }
+    const move1 = { row: row + 1 * this.orientation, col };
+    const move2 = { row: row + 2 * this.orientation, col };
 
+    const piece1 = board.grid[move1.row][move1.col];
+    const piece2 = board.grid[move2.row][move2.col];
+
+    const moves = [];
+    if (!piece1) {
+      moves.push(move1);
+    }
+    if (this.moves === 0 && !piece2) {
+      moves.push(move2);
+    }
     return moves;
   }
 
   attackSquares(board, row, col) {
-    // TODO: handle en passant
-    return [
-      { row: row + this.orientation, col: col + 1 },
-      { row: row + this.orientation, col: col - 1 },
-    ];
+    const attack1 = { row: row + this.orientation, col: col + 1 };
+    const attack2 = { row: row + this.orientation, col: col - 1 };
+
+    const piece1 = board.grid[attack1.row][attack1.col];
+    const piece2 = board.grid[attack2.row][attack2.col];
+
+    const attacks = [];
+    if (piece1 && piece1.color !== this.color) {
+      attacks.push(attack1);
+    }
+
+    if (piece2 && piece2.color !== this.color) {
+      attacks.push(attack2);
+    }
+    return attacks;
   }
 }

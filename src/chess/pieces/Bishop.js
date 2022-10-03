@@ -1,12 +1,12 @@
 import Piece from './Piece';
-import { DIAGONAL } from '../util/Constants';
+import * as Constants from '../util/Constants';
 
 export default class Bishop extends Piece {
   toString() {
-    return 'Bishop';
+    return Constants.BISHOP;
   }
 
   movementDirections() {
-    return DIAGONAL;
+    return Constants.DIAGONAL;
   }
 }
