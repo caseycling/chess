@@ -4,7 +4,9 @@ describe('Testing initial board state of chess app', function () {
   });
 
   it('Creates a chess board with 64 squares', function () {
+    if(cy.forceFlake()) throw new Error('Flake'); 
     cy.get(`.board-sqr`).should('have.length', 64);
+    
   });
 
   it('Populates 8 pawns for white and black', function () {

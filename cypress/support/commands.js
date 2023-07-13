@@ -14,3 +14,8 @@ Cypress.Commands.add('movePiece', (startSqr, endSqr) => {
 Cypress.Commands.add('getSquare', (sqr) => {
   return cy.get(`div[id="${sqr}"]`);
 });
+
+Cypress.Commands.add('forceFlake', () => {
+  var randomNumber = Math.floor(Math.random() * 100) + 1;
+  return randomNumber === true;
+});
